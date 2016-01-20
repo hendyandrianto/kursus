@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 06, 2016 at 08:19 AM
+-- Generation Time: Jan 20, 2016 at 07:24 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -47,8 +47,8 @@ CREATE TABLE IF NOT EXISTS `tbl_activity` (
 --
 
 INSERT INTO `tbl_activity` (`id`, `title`, `start`, `end`, `lama`, `url`, `allDay`, `untuk`, `dibuat_oleh`, `tanggal`, `status`, `className`) VALUES
-(1, 'Pendaftaran Member Baru : M-0001', '2016-01-06', '2016-01-06', 0, '', 'false', '', '1', '0000-00-00 00:00:00', 0, 'bg-blue'),
-(2, 'Pendaftaran Member Baru : M-0001', '2016-01-06', '2016-01-06', 0, '', 'false', '', '1', '0000-00-00 00:00:00', 0, 'bg-blue');
+(1, 'Pendaftaran Member Baru : M-0001', '2016-01-11', '2016-01-11', 0, '', 'false', '', '1', '0000-00-00 00:00:00', 0, 'bg-blue'),
+(2, 'Pembayaran Transaksi : TRAN-160113125113 Kode Member : M-0001 Sebesar : Rp. 120,000', '2016-01-13', '2016-01-13', 0, '', 'false', '', '1', '0000-00-00 00:00:00', 0, 'bg-blue');
 
 -- --------------------------------------------------------
 
@@ -73,6 +73,38 @@ INSERT INTO `tbl_agama` (`id`, `agama`) VALUES
 (3, 'PROTESTAN'),
 (4, 'HINDU'),
 (6, 'KONGHUCU');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_alert`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_alert` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `kode` varchar(20) NOT NULL,
+  `jns` int(11) NOT NULL,
+  `ket` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `tgl_mulai` date NOT NULL,
+  `tgl_selesai` date DEFAULT NULL,
+  `lama` int(5) NOT NULL,
+  `url` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `allDay` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT 'false',
+  `dibuat_oleh` varchar(30) NOT NULL,
+  `tanggal` date NOT NULL,
+  `className` varchar(30) NOT NULL,
+  `bulan` int(11) NOT NULL,
+  `status_tagihan` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `tbl_alert`
+--
+
+INSERT INTO `tbl_alert` (`id`, `kode`, `jns`, `ket`, `tgl_mulai`, `tgl_selesai`, `lama`, `url`, `allDay`, `dibuat_oleh`, `tanggal`, `className`, `bulan`, `status_tagihan`) VALUES
+(2, 'M-0001', 0, 'dkajds 12 X + Biaya SIM - Sanggup Melunasi Pembayaran', '2016-01-11', '2016-01-11', 1, '', 'false', '1', '2016-01-11', 'bg-red', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -111,7 +143,14 @@ CREATE TABLE IF NOT EXISTS `tbl_batas` (
   `status` int(1) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `tbl_batas`
+--
+
+INSERT INTO `tbl_batas` (`id`, `kode_member`, `tgl_expired`, `status`) VALUES
+(1, 'M-0001', '2016-02-09', 1);
 
 -- --------------------------------------------------------
 
@@ -150,7 +189,7 @@ CREATE TABLE IF NOT EXISTS `tbl_cetak` (
   `status_ambil` int(1) NOT NULL COMMENT '0=SudahDiambil 1=BelumDiAmbil',
   `tgl_ambil` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -214,7 +253,7 @@ CREATE TABLE IF NOT EXISTS `tbl_ketidakhadiran` (
   `bulan` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 -- --------------------------------------------------------
 
@@ -237,7 +276,14 @@ CREATE TABLE IF NOT EXISTS `tbl_member` (
   `id_pendidikan` int(2) NOT NULL,
   `id_pekerjaan` int(2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `tbl_member`
+--
+
+INSERT INTO `tbl_member` (`id`, `kode`, `nama`, `jns_kel`, `nama_ortu`, `tempat_lahir`, `tgl_lahir`, `alamat`, `no_hp`, `foto`, `id_agama`, `id_pendidikan`, `id_pekerjaan`) VALUES
+(1, 'M-0001', 'dkajds', 'L', 'jdksjakld', 'jdksjaklds', '2016-01-11', 'jdkajksdj', '08321321392', 'M-0001.jpg', 1, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -254,6 +300,13 @@ CREATE TABLE IF NOT EXISTS `tbl_member_detil` (
   `ket` text NOT NULL,
   PRIMARY KEY (`kode_member`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_member_detil`
+--
+
+INSERT INTO `tbl_member_detil` (`kode_member`, `id_kursus`, `mulai`, `status`, `quota`, `ket`) VALUES
+('M-0001', 8, '2016-01-11 17:55:31', 1, 12, '-');
 
 -- --------------------------------------------------------
 
@@ -327,7 +380,14 @@ CREATE TABLE IF NOT EXISTS `tbl_mulai` (
   `status` int(1) NOT NULL,
   `id_tipe` int(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `tbl_mulai`
+--
+
+INSERT INTO `tbl_mulai` (`id`, `kode_member`, `tgl_mulai`, `tgl_selesai`, `instruktur`, `fasilitas`, `kursus`, `status`, `id_tipe`) VALUES
+(1, 'M-0001', '2016-01-10 17:38:00', '2016-01-10 17:40:00', '2', 3, 7, 0, 2);
 
 -- --------------------------------------------------------
 
@@ -400,6 +460,13 @@ CREATE TABLE IF NOT EXISTS `tbl_registermember` (
   PRIMARY KEY (`kode_reg`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `tbl_registermember`
+--
+
+INSERT INTO `tbl_registermember` (`kode_reg`, `tgl_reg`, `kode_member`, `total`, `discount`, `totalbersih`, `carabayar`, `nama_bank`, `jenis_kartu`, `nomor_kartu`, `bank_asal`, `rek_asal`, `bank_tujuan`, `rek_tujuan`, `post`, `operator`, `status`) VALUES
+('MREG-160111055531', '2016-01-11', 'M-0001', 1200000, 0, 1200000, '0', '', '', '', '', '', '', '', 1, '1', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -413,6 +480,13 @@ CREATE TABLE IF NOT EXISTS `tbl_regmemdetil` (
   `sisa` double NOT NULL,
   PRIMARY KEY (`kode_reg`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_regmemdetil`
+--
+
+INSERT INTO `tbl_regmemdetil` (`kode_reg`, `kode_paket`, `bayar`, `sisa`) VALUES
+('MREG-160111055531', 8, 500000, 700000);
 
 -- --------------------------------------------------------
 
@@ -453,7 +527,7 @@ CREATE TABLE IF NOT EXISTS `tbl_submenu` (
   `level` int(11) NOT NULL,
   `urut` int(2) NOT NULL,
   PRIMARY KEY (`smenu_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `tbl_submenu`
@@ -475,7 +549,9 @@ INSERT INTO `tbl_submenu` (`smenu_id`, `parent`, `nama_smenu`, `slink`, `sicon`,
 (13, 6, 'Laporan Keuangan', 'lap_uang', '#', 0, 1, 1, 1),
 (14, 6, 'Laporan Data Siswa', 'lap_siswa', '#', 0, 1, 1, 2),
 (15, 5, 'Pengambilan Ijazah', 'ambil', '#', 0, 1, 1, 4),
-(16, 5, 'Ketidakhadiran', 't_hadir', '#', 0, 1, 1, 6);
+(16, 5, 'Ketidakhadiran', 't_hadir', '#', 0, 1, 1, 5),
+(17, 5, 'Alert Tagihan', 'alert', '#', 0, 1, 1, 6),
+(18, 6, 'Laporan Data Kerjaan', 'lap_kerja', '#', 0, 1, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -513,14 +589,17 @@ CREATE TABLE IF NOT EXISTS `tbl_subtipe` (
   `expired` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `KODE_AGAMA` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `tbl_subtipe`
 --
 
 INSERT INTO `tbl_subtipe` (`id`, `id_tipe`, `nama`, `ket`, `durasi`, `pertemuan`, `h_pokok`, `h_daftar`, `expired`) VALUES
-(7, 2, '18 X Berikut SIM', '', 18, 18, 1350000, 50000, 30);
+(7, 2, '18 X Berikut SIM', '', 21, 18, 1350000, 50000, 60),
+(8, 2, '12 X + Biaya SIM', '', 14, 12, 1150000, 50000, 60),
+(9, 2, 'Belajar 2 Minggu Tanpa SIM', '', 14, 14, 900000, 50000, 60),
+(10, 2, 'Siswa Pemegang KTP Di Luar Kab. Tasikmalaya', '', 14, 14, 25000, 50000, 60);
 
 -- --------------------------------------------------------
 
@@ -559,6 +638,14 @@ CREATE TABLE IF NOT EXISTS `tbl_transaksi` (
   PRIMARY KEY (`kode_trans`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `tbl_transaksi`
+--
+
+INSERT INTO `tbl_transaksi` (`kode_trans`, `kode_member`, `tgl_bayar`, `total`, `bayar`, `sisa`) VALUES
+('MREG-160111055531', 'M-0001', '2016-01-11 17:55:31', 1200000, 500000, 700000),
+('TRAN-160113125113', 'M-0001', '2016-01-13 00:51:13', 0, 120000, 580000);
+
 -- --------------------------------------------------------
 
 --
@@ -588,6 +675,24 @@ INSERT INTO `tbl_username` (`id`, `nama`, `username`, `password`, `foto`, `level
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `view_alert`
+--
+CREATE TABLE IF NOT EXISTS `view_alert` (
+`id` int(11)
+,`kode` varchar(20)
+,`nama` varchar(50)
+,`jns` int(11)
+,`ket` varchar(255)
+,`tgl_mulai` date
+,`tgl_selesai` date
+,`lama` int(5)
+,`tanggal` date
+,`className` varchar(30)
+,`status_tagihan` int(11)
+);
+-- --------------------------------------------------------
+
+--
 -- Stand-in structure for view `view_ijazah`
 --
 CREATE TABLE IF NOT EXISTS `view_ijazah` (
@@ -600,6 +705,23 @@ CREATE TABLE IF NOT EXISTS `view_ijazah` (
 ,`status_ambil` int(1)
 ,`tgl_ambil` datetime
 ,`nama_tipe` varchar(50)
+);
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `view_ketidakhadiran`
+--
+CREATE TABLE IF NOT EXISTS `view_ketidakhadiran` (
+`id` int(11)
+,`kode` varchar(20)
+,`nama` varchar(50)
+,`jns` int(11)
+,`ket` varchar(255)
+,`tgl_mulai` date
+,`tgl_selesai` date
+,`lama` int(5)
+,`tanggal` date
+,`className` varchar(30)
 );
 -- --------------------------------------------------------
 
@@ -675,11 +797,29 @@ CREATE TABLE IF NOT EXISTS `view_member_kursus` (
 -- --------------------------------------------------------
 
 --
+-- Structure for view `view_alert`
+--
+DROP TABLE IF EXISTS `view_alert`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_alert` AS select `tbl_alert`.`id` AS `id`,`tbl_alert`.`kode` AS `kode`,`tbl_member`.`nama` AS `nama`,`tbl_alert`.`jns` AS `jns`,`tbl_alert`.`ket` AS `ket`,`tbl_alert`.`tgl_mulai` AS `tgl_mulai`,`tbl_alert`.`tgl_selesai` AS `tgl_selesai`,`tbl_alert`.`lama` AS `lama`,`tbl_alert`.`tanggal` AS `tanggal`,`tbl_alert`.`className` AS `className`,`tbl_alert`.`status_tagihan` AS `status_tagihan` from (`tbl_alert` join `tbl_member` on((`tbl_alert`.`kode` = `tbl_member`.`kode`)));
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `view_ijazah`
 --
 DROP TABLE IF EXISTS `view_ijazah`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_ijazah` AS select `view_member`.`kode` AS `kode`,`view_member`.`nama` AS `nama`,`view_member`.`foto` AS `foto`,`tbl_cetak`.`no_ijazah` AS `no_ijazah`,`tbl_cetak`.`status` AS `status`,`tbl_cetak`.`tgl_cetak` AS `tgl_cetak`,`tbl_cetak`.`status_ambil` AS `status_ambil`,`tbl_cetak`.`tgl_ambil` AS `tgl_ambil`,`view_member`.`nama_tipe` AS `nama_tipe` from (`view_member` join `tbl_cetak` on((`view_member`.`kode` = `tbl_cetak`.`kode_member`)));
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `view_ketidakhadiran`
+--
+DROP TABLE IF EXISTS `view_ketidakhadiran`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_ketidakhadiran` AS select `tbl_ketidakhadiran`.`id` AS `id`,`tbl_ketidakhadiran`.`kode` AS `kode`,`tbl_member`.`nama` AS `nama`,`tbl_ketidakhadiran`.`jns` AS `jns`,`tbl_ketidakhadiran`.`ket` AS `ket`,`tbl_ketidakhadiran`.`tgl_mulai` AS `tgl_mulai`,`tbl_ketidakhadiran`.`tgl_selesai` AS `tgl_selesai`,`tbl_ketidakhadiran`.`lama` AS `lama`,`tbl_ketidakhadiran`.`tanggal` AS `tanggal`,`tbl_ketidakhadiran`.`className` AS `className` from (`tbl_ketidakhadiran` join `tbl_member` on((`tbl_ketidakhadiran`.`kode` = `tbl_member`.`kode`)));
 
 -- --------------------------------------------------------
 
